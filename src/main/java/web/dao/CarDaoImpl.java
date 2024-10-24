@@ -1,18 +1,18 @@
-package web.DAO;
+package web.dao;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import web.model.Car;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
-public class CarDAO {
+@Repository
+public class CarDaoImpl implements CarDao {
 
-    private List<Car> car;
+    private final List<Car> car;
 
     {
-        car = new ArrayList<Car>();
+        car = new ArrayList<>();
         car.add(new Car("Mercedes-Benz", 24, "Black"));
         car.add(new Car("BMW", 23, "White"));
         car.add(new Car("Audi", 22, "Space-Black"));
@@ -20,12 +20,9 @@ public class CarDAO {
         car.add(new Car("Tesla", 20, "Black"));
     }
 
+    @Override
     public List<Car> getCars() {
         return car;
     }
 
-    public List<Car> showCountCars(int id) {
-        List<Car> limitedCar = (car.size() > 5) ? car : car.stream().limit(id).toList();
-        return limitedCar;
-    }
 }
